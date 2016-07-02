@@ -25,6 +25,39 @@ describe('Css classes obfuscation module', () => {
     expect(obfuscationResult).to.deep.equal(expectedResult);
   });
 
+  it('shoud increment new name length', () => {
+    const data = ['one', 'two', 'three'];
+    let obfuscationResult = obfuscation(data, 'z');
+    const expectedResult = {
+      'one': 'z',
+      'two': 'aa',
+      'three': 'ab'
+    }
+    expect(obfuscationResult).to.deep.equal(expectedResult);
+  });
+
+  it('shoud increment chars in long names', () => {
+    const data = ['one', 'two', 'three'];
+    let obfuscationResult = obfuscation(data, 'abzc');
+    const expectedResult = {
+      'one': 'abzc',
+      'two': 'abzd',
+      'three': 'abze'
+    }
+    expect(obfuscationResult).to.deep.equal(expectedResult);
+  });
+
+  it('shoud increment new long name length', () => {
+    const data = ['one', 'two', 'three'];
+    let obfuscationResult = obfuscation(data, 'abzz');
+    const expectedResult = {
+      'one': 'abzz',
+      'two': 'abzaa',
+      'three': 'abzab'
+    }
+    expect(obfuscationResult).to.deep.equal(expectedResult);
+  });
+
   // it('shoud return classes obfuscation', () => {
   //   let urlClasses = 'https://raw.githubusercontent.com/FrontendSimf20016/obfuscator/master/data.json';
   //   getclasses(urlClasses).then(getClassesSuccess, getClassesError);
