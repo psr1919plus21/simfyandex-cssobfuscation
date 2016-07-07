@@ -1,6 +1,6 @@
 /**
- * @param { String } startLetter – начальная строка для формирования имен классов
- */
+  * @param { String } startLetter – начальная строка для формирования имен классов
+  */
 function getPrevState (startLetter) {
   let prevStartChar = String.fromCharCode(startLetter[startLetter.length - 1].charCodeAt() - 1);
   startLetter = startLetter.slice(0, startLetter.length - 1);
@@ -21,7 +21,15 @@ module.exports = function(data, _startLetter = 'a') {
     if (!classesObj[className]) {
       if (newClassName[newClassName.length - 1].charCodeAt() === Z_CHAR) {
         newClassName = newClassName.slice(0, newClassName.length - 1);
-        newClassName += 'aa';
+        let prevLetter = newClassName[newClassName.length - 1];
+        if (prevLetter) {
+          newClassName = newClassName.slice(0, newClassName.length - 1);
+          let upPrevLetter = String.fromCharCode(prevLetter.charCodeAt() + 1);
+          newClassName += upPrevLetter;
+        } else {
+          newClassName += 'a';
+        }
+        newClassName += 'a';
       } else {
         let newCharacter = String.fromCharCode(newClassName[newClassName.length - 1].charCodeAt() + 1);
         newClassName = newClassName.slice(0, newClassName.length - 1);

@@ -36,27 +36,27 @@ describe('Css classes obfuscation module', () => {
     expect(obfuscationResult).to.deep.equal(expectedResult);
   });
 
-  it('shoud increment chars in long names', () => {
+  it('shoud increment previous char.', () => {
     const data = ['one', 'two', 'three'];
-    let obfuscationResult = obfuscation(data, 'abzc');
+    let obfuscationResult = obfuscation(data, 'az');
     const expectedResult = {
-      'one': 'abzc',
-      'two': 'abzd',
-      'three': 'abze'
+      'one': 'az',
+      'two': 'ba',
+      'three': 'bb'
     }
     expect(obfuscationResult).to.deep.equal(expectedResult);
   });
 
-  it('shoud increment new long name length', () => {
-    const data = ['one', 'two', 'three'];
-    let obfuscationResult = obfuscation(data, 'abzz');
-    const expectedResult = {
-      'one': 'abzz',
-      'two': 'abzaa',
-      'three': 'abzab'
-    }
-    expect(obfuscationResult).to.deep.equal(expectedResult);
-  });
+  // it('shoud increment new long name length', () => {
+  //   const data = ['one', 'two', 'three'];
+  //   let obfuscationResult = obfuscation(data, 'abz');
+  //   const expectedResult = {
+  //     'one': 'abzz',
+  //     'two': 'abzaa',
+  //     'three': 'abzab'
+  //   }
+  //   expect(obfuscationResult).to.deep.equal(expectedResult);
+  // });
 
   // it('shoud return classes obfuscation', () => {
   //   let urlClasses = 'https://raw.githubusercontent.com/FrontendSimf20016/obfuscator/master/data.json';
