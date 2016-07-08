@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import obfuscation from '../src/static/js/obfuscation';
+import {sortDataByFrequency} from '../src/static/js/sortData';
 import getclasses from '../src/static/js/getclasses';
 
 describe('Css classes obfuscation module', () => {
@@ -18,9 +19,9 @@ describe('Css classes obfuscation module', () => {
     const data = ['one', 'two', 'three', 'two', 'three', 'three', 'one'];
     let obfuscationResult = obfuscation(data);
     const expectedResult = {
-      'one': 'a',
-      'two': 'b',
-      'three': 'c'
+      'three': 'a',
+      'one': 'b',
+      'two': 'c',
     }
     expect(obfuscationResult).to.deep.equal(expectedResult);
   });
@@ -47,16 +48,36 @@ describe('Css classes obfuscation module', () => {
     expect(obfuscationResult).to.deep.equal(expectedResult);
   });
 
-  // it('shoud increment new long name length', () => {
-  //   const data = ['one', 'two', 'three'];
-  //   let obfuscationResult = obfuscation(data, 'abz');
-  //   const expectedResult = {
-  //     'one': 'abzz',
-  //     'two': 'abzaa',
-  //     'three': 'abzab'
-  //   }
-  //   expect(obfuscationResult).to.deep.equal(expectedResult);
-  // });
+  it('shoud increment new long name length', () => {
+    const data = ['one', 'two', 'three'];
+    let obfuscationResult = obfuscation(data, 'zzz');
+    const expectedResult = {
+      'one': 'zzz',
+      'two': 'zzaa',
+      'three': 'zzab'
+    }
+    expect(obfuscationResult).to.deep.equal(expectedResult);
+  });
+
+  it('shoud sort data by length', () => {
+    const data = ['a', 'aa', 'a', 'aaa', 'aa', 'aa', 'aa', 'bb', 'bb', 'bb'];
+    let sortResult = sortDataByFrequency(data);
+    const expectedResult = ['aa', 'bb', 'a', 'aaa'];
+    expect(sortResult).to.deep.equal(expectedResult);
+  });
+
+  it('shoud sort data and abfuscation.', () => {
+    const data = ['a', 'aa', 'a', 'aaa', 'aa', 'aa', 'aa', 'bb', 'bb', 'bb'];
+    let obfuscationResult = obfuscation(data);
+    const expectedResult = {
+      'aa': 'a',
+      'bb': 'b',
+      'a': 'c',
+      'aaa': 'd'
+    }
+
+    expect(obfuscationResult).to.deep.equal(expectedResult);
+  });
 
   // it('shoud return classes obfuscation', () => {
   //   let urlClasses = 'https://raw.githubusercontent.com/FrontendSimf20016/obfuscator/master/data.json';
