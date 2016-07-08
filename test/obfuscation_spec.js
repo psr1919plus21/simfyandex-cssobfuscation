@@ -79,20 +79,6 @@ describe('Css classes obfuscation module', () => {
     expect(obfuscationResult).to.deep.equal(expectedResult);
   });
 
-  // it('shoud return classes obfuscation', () => {
-  //   let urlClasses = 'https://raw.githubusercontent.com/FrontendSimf20016/obfuscator/master/data.json';
-  //   getclasses(urlClasses).then(getClassesSuccess, getClassesError);
-
-  //   function getClassesSuccess (data) {
-  //     console.log('resolve');
-  //     let obfuscationResult = obfuscation(data);
-  //     expect("test").to.equal("test");
-  //   }
-
-  //   function getClassesError (err) {
-  //   }
-  // });
-
   it('shoud be error if classes request is wrong', () => {
     let urlClasses = 'bad url';
     getclasses(urlClasses).then(getClassesSuccess, getClassesError);

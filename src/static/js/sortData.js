@@ -5,6 +5,7 @@ export function sortDataByFrequency(data) {
   let sortedData = [];
   let freqObj = {};
 
+  /* Make object with frequency field. */
   data.forEach((name) => {
     if (freqObj[name]) {
       freqObj[name].frequency++;
@@ -13,9 +14,9 @@ export function sortDataByFrequency(data) {
       freqObj[name].name = name;
       freqObj[name].frequency = 1;
     }
-
-
   });
+
+  /* Turn object to array. */
   for (var key in freqObj) {
     if (freqObj.hasOwnProperty(key)) {
       let newObj = {}
@@ -23,7 +24,8 @@ export function sortDataByFrequency(data) {
     }
   }
 
-  function compare(a,b) {
+  /* Float up the most common names. */
+  function floatUp(a,b) {
     if (a.frequency > b.frequency)
       return -1;
     if (a.frequency < b.frequency)
@@ -31,6 +33,6 @@ export function sortDataByFrequency(data) {
     return 0;
   }
 
-  sortedData = sortedData.sort(compare).map((obj) => obj.name);
+  sortedData = sortedData.sort(floatUp).map((obj) => obj.name);
   return sortedData;
 }
